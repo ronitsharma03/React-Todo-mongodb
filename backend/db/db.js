@@ -56,23 +56,25 @@ const todoSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    title: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    description: {
-        type: String,
-        trim: true,
-        required: false
-    },
-    marked: {
-        type: boolean,
-        default: false
-    },
-    date: {
-        type: Date,
-        default: Date.now
+    todo: {
+        title: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        description: {
+            type: String,
+            trim: true,
+            required: false
+        },
+        marked: {
+            type: boolean,
+            default: false
+        },
+        date: {
+            type: Date,
+            default: Date.now
+        }
     }
 });
 
