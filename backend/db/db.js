@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const { boolean } = require("zod");
 dotenv.config();
 
 const uri = process.env.MONGODB_URI;
-async function connectDb(){
-    try{
+async function connectDb() {
+    try {
         await mongoose.connect();
-    }catch(e){
+    } catch (e) {
         console.log(`Error connecting to the db: ${e}`);
         process.exit(1);
     }
@@ -28,17 +29,17 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 8,
+        minLength: 6,
         trim: true
     },
-    firstName: {
+    firstname: {
         type: String,
         required: true,
         trim: true,
         minLength: 3,
         maxLength: 30
     },
-    lastName: {
+    lastname: {
         type: String,
         required: false,
         trim: true,
@@ -64,6 +65,14 @@ const todoSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: false
+    },
+    marked: {
+        type: boolean,
+        default: false
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 
@@ -73,4 +82,4 @@ const Todo = mongoose.model("Todo", todoSchema);
 module.exports = {
     User,
     Todo
-};
+}
