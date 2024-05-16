@@ -2,8 +2,8 @@ const dotenv = require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { User, Todo } = require("../db");
-const { authMiddleware } = require("../middleware");
+const { User, Todo } = require("../db/db");
+const { authMiddleware } = require("../middleware/middleware");
 const zod = require("zod");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -76,4 +76,7 @@ router.post("/signup", async (req, res) => {
             message: "Something went wrong!"
         });
     }
-})
+});
+
+
+module.exports = router;

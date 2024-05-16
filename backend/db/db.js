@@ -1,19 +1,15 @@
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const { boolean } = require("zod");
-dotenv.config();
+const dotenv = require("dotenv").config();
 
-const uri = process.env.MONGODB_URI;
-async function connectDb() {
-    try {
-        await mongoose.connect();
-    } catch (e) {
-        console.log(`Error connecting to the db: ${e}`);
-        process.exit(1);
-    }
+try {
+    mongoose.connect(process.env.MONGODB_URL)
+        .then(() => {
+            console.log("Connected to DB");
+        })
 }
-
-connectDb(process.env.MONGODB_URI);
+catch (e) {
+    console.log("Cannot connect to database Error: " + e);
+}
 
 
 // Mongoose Model for user and Todos
@@ -56,26 +52,25 @@ const todoSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    todo: {
-        title: {
-            type: String,
-            required: true,
-            trim: true
-        },
-        description: {
-            type: String,
-            trim: true,
-            required: false
-        },
-        marked: {
-            type: boolean,
-            default: false
-        },
-        date: {
-            type: Date,
-            default: Date.now
-        }
+    title: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    description: {
+        type: String,
+        trim: true,
+        required: false
+    },
+    marked: {
+        type: Boolean,
+        default: false
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
+
 });
 
 const Todo = mongoose.model("Todo", todoSchema);
