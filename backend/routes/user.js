@@ -12,7 +12,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 router.get('/me', async (req, res) => {
     const token = req.headers.authorization;
 
-    if(!token){
+    if (!token) {
         return res.status(411).json({
             message: "Authentication failed!"
         });
@@ -34,43 +34,45 @@ const signupBody = zod.object({
 
 router.post("/signup", async (req, res) => {
     const { success } = signupBody.safeParse(req.body);
-    if(!success){
+    if (!success) {
         return res.status(411).json({
             message: "Wrong Inputs"
         });
     }
 
-    try{
-        const existingUser = await User.findone({
+    try {
+        const existingUser = await User.findOne({
             username: req.body.username
         });
 
-        if(!existingUser){
+        if (existingUser) {
             return res.status(411).json({
                 message: "Email already taken!"
             });
+        } else {
+
+            const hash = await bcrypt.hash(req.body.password, saltRounds);
+            const newUser = await User.create({
+                username: req.body.username,
+                password: hash,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname
+            });
+            // console.log(newUser)
+
+            const userId = newUser._id;
+
+
+            const token = jwt.sign({
+                userId
+            }, JWT_SECRET);
+
+            return res.status(200).json({
+                message: "Signup successfull",
+                token: token
+            });
         }
-
-        const hast = await bcrypt.hash(req.body.password, saltRounds);
-        const newUser = await User.create({
-            username: req.body.username,
-            password: hash,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname
-        });
-
-        const userId = req.newUser._id;
-
-
-        const token = jwt.sign({
-            userId
-        }, JWT_SECRET);
-
-        return res.status(200).json({
-            message: "Signup successfull",
-            token: token
-        })
-    }catch(error){
+    } catch (error) {
         console.log(`Error signing up the user ${error}`);
         return res.status(411).json({
             message: "Something went wrong!"
