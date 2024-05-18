@@ -136,7 +136,7 @@ router.post("/signin", async (req, res) => {
 
 // Route to update the user profile
 const updateBody = zod.object({
-    password: zod.string().optional(),
+    password: zod.string().min(6).optional(),
     firstname: zod.string().optional(),
     lastname: zod.string().optional()
 });
@@ -147,12 +147,19 @@ router.put("/profile", authMiddleware, async (req, res) => {
             message: "Something went wrong!"
         });
     }
-    
+
     try {
-        await User.updateOne({ _id: req.userId }, 
-            req.body
+        const { password, firstname, lastname } = req.body;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        await User.updateOne({ _id: req.userId },
+            {
+                password: hashedPassword,
+                firstname: firstname,
+                lastname: lastname
+            }
         );
-    }catch(e){
+    } catch (e) {
         console.log(`Error while updating profile ${e}`);
         return res.status(411).json({
             message: "Internal server Error"
