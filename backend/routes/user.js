@@ -100,38 +100,68 @@ router.post("/signin", async (req, res) => {
             const loggedUser = await User.findOne({
                 username: req.body.username,
             });
-            
-            if(!loggedUser){
+
+            if (!loggedUser) {
                 return res.status(411).json({
                     message: "User not found!"
                 });
             }
 
             const isPassword = await bcrypt.compare(req.body.password, loggedUser.password);
-            if(!isPassword){
+            if (!isPassword) {
                 return res.status(411).json({
                     message: "Error while logging in: Incorrect password"
                 });
             }
 
-            
+
             const token = jwt.sign({
-               userId: loggedUser._id 
+                userId: loggedUser._id
             }, JWT_SECRET);
 
             res.status(200).json({
-                message: "User Authenticated!",
+                message: "Signin successfull!",
                 token: token,
                 firstname: loggedUser.firstname
             });
-        }catch(e){
+        } catch (e) {
             console.log(e);
             return res.status(411).json({
                 message: "Signin route catch - Something went wrong!"
             })
         }
-        
+
     }
+});
+
+// Route to update the user profile
+const updateBody = zod.object({
+    password: zod.string().optional(),
+    firstname: zod.string().optional(),
+    lastname: zod.string().optional()
+});
+router.put("/profile", authMiddleware, async (req, res) => {
+    const { success } = updateBody.safeParse(req.body);
+    if (!success) {
+        return res.status(411).json({
+            message: "Something went wrong!"
+        });
+    }
+    
+    try {
+        await User.updateOne({ _id: req.userId }, 
+            req.body
+        );
+    }catch(e){
+        console.log(`Error while updating profile ${e}`);
+        return res.status(411).json({
+            message: "Internal server Error"
+        });
+    }
+
+    return res.status(200).json({
+        message: "Updated successfully!"
+    });
 });
 
 
