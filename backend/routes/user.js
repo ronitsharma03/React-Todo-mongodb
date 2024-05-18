@@ -1,13 +1,15 @@
-const dotenv = require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { User } = require("../db/db");
+const todoRouter = require("./todo");
 const { authMiddleware } = require("../middleware/middleware");
 const zod = require("zod");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const JWT_SECRET = process.env.JWT_SECRET;
+
+router.use("/todos", todoRouter);
 
 
 
