@@ -14,12 +14,12 @@ const todoBody = zod.object({
 router.post("/create", authMiddleware, async (req, res) => {
     const { success } = todoBody.safeParse(req.body);
     const { title, description, marked, Date } = req.body;
-    if(!success){
+    if (!success) {
         return res.status(411).json({
             message: "Check Inputs Please"
         });
     }
-    try{
+    try {
         await Todo.create({
             userId: req.userId,
             title: title,
@@ -27,18 +27,62 @@ router.post("/create", authMiddleware, async (req, res) => {
             marked: marked,
             Date: Date
         });
-        
+
         return res.json({
             message: "Todo created successfully!"
         });
-    }catch(e){
+    } catch (e) {
         console.log(`Error creating Todo ${e}`);
         return res.status(411).json({
             message: "Error creating Todo"
         });
     }
-    
 
+
+
+});
+
+const todoUpdateBody = zod.object({
+    title: zod.string().optional(),
+    description: zod.string().optional(),
+    marked: zod.boolean().optional(),
+    Date: zod.date().optional()
+});
+router.put("/update/:id", authMiddleware, async (req, res) => {
+    const { success, data, error } = todoUpdateBody.safeParse(req.body);
+    const { id } = req.params;
+    if (!success) {
+        return res.status(411).json({
+            message: "Wrong inputs, Try again!",
+            error: error
+        });
+    }
+
+    try {
+        const updatedTodo = await Todo.findByIdAndUpdate(
+            id, 
+            data,
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+        console.log(updatedTodo);
+        if (!updatedTodo) {
+            return res.status(404).json({
+                message: "Error while updating todos"
+            });
+        }
+        return res.json({
+            message: "Updated successfully!",
+            todos: updatedTodo
+        });
+    } catch (e) {
+        console.log(`Error occurred ${e}`);
+        return res.status(411).json({
+            message: "Internal Server Error!"
+        });
+    }
 
 });
 
