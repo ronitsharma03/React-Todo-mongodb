@@ -60,7 +60,7 @@ router.put("/update/:id", authMiddleware, async (req, res) => {
 
     try {
         const updatedTodo = await Todo.findByIdAndUpdate(
-            id, 
+            id,
             data,
             {
                 new: true,
@@ -83,7 +83,40 @@ router.put("/update/:id", authMiddleware, async (req, res) => {
             message: "Internal Server Error!"
         });
     }
-
 });
 
+// Route to mark the todo whether true or false
+router.patch("/:id/toggle", authMiddleware, async (req, res) => {
+    const { id } = req.params;
+    try {
+        const todo = await Todo.findById(id);
+
+        if (!todo) {
+            return res.status(411).json({
+                message: "Todo not found!"
+            });
+        }
+
+        const markedTodo = await Todo.findByIdAndUpdate(
+            id,
+            { marked: !todo.marked },
+            { new: true, runValidators: true }
+        );
+        console.log(markedTodo);
+        if(!markedTodo){
+            return res.status(411).json({
+                message: "Error marking Todo"
+            });
+        }
+
+        return res.json({
+            message: "Marked todo successfully!"
+        });
+    }catch(error){
+        return res.status(404).json({
+            message: "Failed Marking Todo",
+            error: error
+        });
+    }
+});
 module.exports = router;
