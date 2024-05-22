@@ -48,7 +48,7 @@ const todoUpdateBody = zod.object({
     marked: zod.boolean().optional(),
     Date: zod.date().optional()
 });
-router.put("/update/:id", authMiddleware, async (req, res) => {
+router.put("/:id/update", authMiddleware, async (req, res) => {
     const { success, data, error } = todoUpdateBody.safeParse(req.body);
     const { id } = req.params;
     if (!success) {
@@ -141,6 +141,30 @@ router.delete("/:id/delete", authMiddleware, async (req, res) => {
         return res.status(411).json({
             message: "Error deleting the Todo"
         })
+    }
+});
+
+router.get("/mytodos", authMiddleware, async (req, res) => {
+    try{
+        const userTodos = await Todo.find({
+            userId: req.userId
+        });
+
+        if(!userTodos){
+            return res.json({
+                message: "Todo list is empty"
+            });
+        }
+
+        console.log(userTodos);
+        return res.json({
+            todos: userTodos
+        });
+    }catch(e){
+        console.log("Unexpected Error occurred");
+        return res.status(404).json({
+            message: "Unexpected error happened"
+        });
     }
 });
 module.exports = router;
