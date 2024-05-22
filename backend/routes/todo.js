@@ -119,4 +119,28 @@ router.patch("/:id/toggle", authMiddleware, async (req, res) => {
         });
     }
 });
+
+router.delete("/:id/delete", authMiddleware, async (req, res) => {
+    const { id } = req.params;
+    try{
+        const todo = await Todo.findById(id);
+        if(!todo){
+            return res.status(411).json({
+                message: "No todo found"
+            });
+        }
+
+        const delTodo = await Todo.findByIdAndDelete(id);
+        console.log(delTodo);
+        return res.json({
+            message: "Todo deleted successfully!",
+            id: delTodo.id
+        })
+    }catch(error){
+        console.log(`Error deleting Todo!`);
+        return res.status(411).json({
+            message: "Error deleting the Todo"
+        })
+    }
+});
 module.exports = router;
