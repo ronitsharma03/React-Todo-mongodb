@@ -1,13 +1,10 @@
-import { Button } from "./components/Button";
-import { Input } from "./components/Input";
+import { Signup } from "./pages/Signup";
 
 
 function App() {
   return (
     <div>
-      <Input type="text" />
-      <Input type="text" />
-      <Button text="Add Todo" />
+      <Signup />
     </div>
   )
 }
