@@ -2,10 +2,8 @@
 
 export const Description = ({Description}) => {
     return (
-        <div>
-            <div>
+            <div className="text-red-700">
                 {Description}
             </div>
-        </div>
     )
 }

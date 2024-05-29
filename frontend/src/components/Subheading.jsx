@@ -1,10 +1,8 @@
 
-export const Subheading = ({subHeadingText}) => {
+export const Subheading = ({ subHeadingText }) => {
     return (
-        <div>
-            <div>
-                {subHeadingText}
-            </div>
+        <div className="text-lg mb-20">
+            {subHeadingText}
         </div>
     )
 }

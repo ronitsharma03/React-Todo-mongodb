@@ -1,11 +1,11 @@
+import { Link } from "react-router-dom";
 
 
-export const BottomWarning = ({warningText}) => {
+export const BottomWarning = ({ warningText, buttonText, to }) => {
     return (
-        <div>
-            <div>
-                {warningText}
-            </div>
+        <div className="mt-10">
+            {warningText}
+            {/* <Link to={to}>{buttonText} </Link> */}
         </div>
     )
 }
