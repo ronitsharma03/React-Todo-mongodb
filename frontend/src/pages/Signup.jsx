@@ -40,7 +40,7 @@ export const Signup = () => {
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
             <div className="w-full h-screen flex flex-col items-center justify-center bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700">
-                <div className="bg-blue-100 px-32 pt-10 pb-20 rounded-xl flex flex-col items-center w-[35%]">
+                <div className="bg-blue-100 px-28 pt-20 pb-20 rounded-xl flex flex-col items-center w-[35%]">
                     <Heading headingText={"Welcome"} />
                     <Subheading subHeadingText={"Create an account"} />
                     <Input type={"email"} placeText={"yours@example.com"} labelText={"Email"} onchange={e => {
