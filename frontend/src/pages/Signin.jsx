@@ -1,9 +1,8 @@
 import { BottomWarning } from "../components/Bottomwarning"
 import { Heading } from "../components/Heading"
 import { Input } from "../components/Input"
-import { Subheading } from "../components/Subheading"
 import { Button } from "../components/Button"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom"
@@ -11,7 +10,6 @@ import { useNavigate } from "react-router-dom"
 export const Signin = () => {
     const [username, setusername] = useState("");
     const [password, setPassword] = useState("");
-    const [resmessage, setresmessage] = useState("");
     const navigate = useNavigate();
 
     const signinData = async () => {
@@ -26,13 +24,12 @@ export const Signin = () => {
                 }
             )
             localStorage.setItem("token", response.data.token);
-            setresmessage(response.data.message);
             const loggedUserName = response.data.firstname;
             localStorage.setItem("name", ((loggedUserName).charAt(0).toUpperCase() + (loggedUserName).slice(1)));
-            toast.success("Logging in..", {
+            toast.success("Logged in..", {
                 id: "signin"
             });
-            navigate("/");
+            navigate("/dashboard");
         }catch(e){
             console.log(`Error logging in ${e}`);
             toast.error(e.response?.data?.message || "An error occurred while logging in", {
