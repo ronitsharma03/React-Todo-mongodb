@@ -6,6 +6,7 @@ import { Button } from "../components/Button"
 import { useState } from "react"
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom"
 
 export const Signup = () => {
 
@@ -14,9 +15,14 @@ export const Signup = () => {
     const [firstname, setfirstname] = useState("");
     const [lastname, setlastname] = useState("");
 
+    const navigate = useNavigate();
+
 
     const signupData = async () => {
         try {
+            toast.loading("Signing up..", {
+                id: "signup"
+            });
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/signup`,
                 {
                     username,
@@ -27,13 +33,14 @@ export const Signup = () => {
             );
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("name", ((firstname).charAt(0).toUpperCase() + (firstname).slice(1)));
-            toast.loading("Signing up..", {
-                duaration: 1000
+            toast.success("Signing up..", {
+                id: "signup"
             });
+            navigate("/signin")
         } catch (e) {
             console.log(`Error ${e}`);
             toast.error("Check Inputs!", {
-                duration: 2000
+                id: "signup"
             });
         }
     }
