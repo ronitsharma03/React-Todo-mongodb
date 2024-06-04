@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { IconListTodo } from "./Icon";
 import toast, { Toaster } from "react-hot-toast";
+import { ThemeBtn } from "./ThemeBtn";
 
 
 export const Appbar = (
@@ -20,7 +21,7 @@ export const Appbar = (
     }
 
     return (
-        <header className="max-sm:px-4 w-full flex flex-row items-center justify-between px-5 py-3 bg-blue-600">
+        <header className="max-sm:px-4 w-full flex flex-row items-center justify-between px-5 py-3 bg-blue-600 dark:bg-blue-900">
             <div className="flex items-center gap-5">
                 <Link draggable={false} to={"/dashboard"}>
                     <div className="flex items-center gap-5">
@@ -35,6 +36,7 @@ export const Appbar = (
             <div>
                 <nav className="">
                     <ul className="flex items-center gap-10">
+                        <ThemeBtn />
                         <div className="max-sm:hidden text-white text-xl tracking-wide">
                             {"Welcome, " + user}
                         </div>

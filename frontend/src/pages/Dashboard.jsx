@@ -17,7 +17,7 @@ export const Dashboard = () => {
     }, []);
 
     return (
-        <section className="h-screen bg-slate-900 overflow-hidden">
+        <section className="h-screen dark:bg-slate-950 overflow-hidden">
             <div>
                 <Appbar user={localStorage.getItem("name")} />
             </div>
@@ -32,7 +32,7 @@ export const Dashboard = () => {
                 <div className="flex items-center justify-center p-5">
                     <Create />
                 </div>
-                <Todo />
+                {/* <Todo /> */}
             </div>
         </section>
     )

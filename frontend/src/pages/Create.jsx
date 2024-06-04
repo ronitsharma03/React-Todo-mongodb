@@ -54,11 +54,11 @@ export const Create = ({ forTitle, forDescription, clickDone }) => {
                 <div className="flex items-center justify-end gap-2 pb-2 mr-5">
                     <button
                         onClick={handleCloseClick}
-                        className="text-white cursor-pointer px-4 py-1 hover:bg-slate-800 text-sm"
+                        className="dark:text-white cursor-pointer px-4 py-1 text-sm"
                     >
                         Close
                     </button>
-                    <button onClick={clickDone} className="text-white cursor-pointer px-4 py-1 hover:bg-slate-800 text-sm">
+                    <button onClick={clickDone} className="dark:text-white cursor-pointer px-4 py-1 text-sm">
                         Done
                     </button>
                 </div>
