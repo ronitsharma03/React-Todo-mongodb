@@ -25,7 +25,7 @@ export const Dashboard = () => {
                 });
         } catch (e) {
             toast.error("Something went wrong", {
-                id: "todo"
+                id: "signin"
             });
         }
     }, []);
@@ -43,13 +43,20 @@ export const Dashboard = () => {
                 </div>
 
                 {
-                    isLoading ? <Loader /> : <div className="px-4 w-full grid gap-4 sm:grid sm:grid-cols-2 md:grid-cols-4">
-                        {
-                            todo.map((item, index) => {
-                                return <Todo key={index} title={item.title} description={item.description} Date={item.Date} marked={item.marked} />
-                            })
-                        }
-                    </div>
+                    isLoading ? (
+                        <Loader />
+                    ) : todo.length === 0 ? (
+                        // Display toast when there are no todos
+                        <div className="flex items-center justify-center h-full">
+                            {toast.error("No todos to display", {id: "logout"})}
+                        </div>
+                    ) : (
+                        <div className="px-4 w-full grid gap-4 sm:grid sm:grid-cols-2 md:grid-cols-4">
+                            {todo.map((item, index) => (
+                                <Todo key={index} title={item.title} description={item.description} Date={item.Date} marked={item.marked} />
+                            ))}
+                        </div>
+                    )
                 }
             </div>
             <Toaster position="top-center" />
