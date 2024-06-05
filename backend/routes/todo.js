@@ -158,7 +158,8 @@ router.get("/mytodos", authMiddleware, async (req, res) => {
 
         console.log(userTodos);
         return res.json({
-            todos: userTodos
+            todos: userTodos,
+            message: "Todo found!"
         });
     }catch(e){
         console.log("Unexpected Error occurred");
