@@ -5,7 +5,7 @@ import { ThemeBtn } from "./ThemeBtn";
 
 
 export const Appbar = (
-    { user }
+    { user, themeFn }
 ) => {
     const navigate = useNavigate();
     const logout = async () => {
@@ -36,7 +36,7 @@ export const Appbar = (
             <div>
                 <nav className="">
                     <ul className="flex items-center gap-10">
-                        <ThemeBtn />
+                        <ThemeBtn ThemeBtn={themeFn} />
                         <div className="max-sm:hidden text-white text-xl tracking-wide">
                             {"Welcome, " + user}
                         </div>
