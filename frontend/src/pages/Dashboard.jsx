@@ -21,7 +21,7 @@ export const Dashboard = () => {
     }, []);
 
     return (
-        <section className="h-screen dark:bg-slate-950 overflow-hidden">
+        <section className="min-h-screen dark:bg-slate-950">
             <div>
                 <Appbar user={localStorage.getItem("name")} />
             </div>
@@ -30,7 +30,7 @@ export const Dashboard = () => {
                 <div className="flex items-center justify-center p-5">
                     <Create />
                 </div>
-                <div className="px-5 h-screen grid sm:grid-cols-6 gap-7 grid-cols-2 grid-rows-4 max-sm:grid-rows-3">
+                <div className="px-4 w-full grid gap-4 sm:grid sm:grid-cols-2 md:grid-cols-4">
                     {
                         todo.map((item, index) => {
                             return <Todo key={index} title={item.title} description={item.description} Date={item.Date} marked={item.marked}/>

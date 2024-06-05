@@ -36,7 +36,7 @@ export const Create = ({ forTitle, forDescription, clickDone }) => {
     };
 
     return (
-        <div ref={divRef} className="max-sm:w-full max-md:w-[70%] flex flex-col w-[50%] bg-transparent border border-slate-600 rounded-xl transition-all duration-300">
+        <div ref={divRef} className="mt-20 max-sm:w-full max-md:w-[70%] flex flex-col w-[50%] bg-transparent border border-slate-600 rounded-xl transition-all duration-300">
             <input
                 ref={titleRef}
                 onClick={handleInputClick}

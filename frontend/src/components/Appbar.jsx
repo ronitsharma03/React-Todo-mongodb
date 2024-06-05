@@ -21,7 +21,7 @@ export const Appbar = (
     }
 
     return (
-        <header className="max-sm:px-4 w-full flex flex-row items-center justify-between px-5 py-3 bg-blue-600 dark:bg-blue-900">
+        <header className="fixed top-0 max-sm:px-4 w-full flex flex-row items-center justify-between px-5 py-3 bg-blue-600 dark:bg-blue-900">
             <div className="flex items-center gap-5">
                 <Link draggable={false} to={"/dashboard"}>
                     <div className="flex items-center gap-5">
