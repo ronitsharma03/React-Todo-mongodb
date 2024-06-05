@@ -8,10 +8,14 @@ export const Dashboard = () => {
     const [todo, setTodo] = useState([]);
 
     useEffect(() => {
-        const response = axios.get(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/mytodos`, {
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/mytodos`, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
             }
+        })
+        .then(response => {
+            // console.log(response.data.todos[0]);
+            setTodo(response.data.todos);
         });
 
     }, []);
@@ -21,18 +25,18 @@ export const Dashboard = () => {
             <div>
                 <Appbar user={localStorage.getItem("name")} />
             </div>
-            <div className="relative">
-                <div className="absolute translate-x-[60%] translate-y-[70%]">
-                    <div className="text-blue-500/5 text-[15rem] select-none">
-                        FOCUS.
-                    </div>
-                </div>
-            </div>
-            <div className="">
+
+            <div className="flex flex-col gap-10">
                 <div className="flex items-center justify-center p-5">
                     <Create />
                 </div>
-                {/* <Todo /> */}
+                <div className="px-5 h-screen grid sm:grid-cols-6 gap-7 grid-cols-2 grid-rows-4 max-sm:grid-rows-3">
+                    {
+                        todo.map((item, index) => {
+                            return <Todo key={index} title={item.title} description={item.description} Date={item.Date} marked={item.marked}/>
+                        })
+                    }
+                </div>
             </div>
         </section>
     )
