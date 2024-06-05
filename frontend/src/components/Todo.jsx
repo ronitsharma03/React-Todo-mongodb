@@ -23,11 +23,11 @@ export const Todo = ({ title, description, Date, marked }) => {
                     </div>
                 </div>
                 <div className="px-2 py-3 w-full col-span-4 row-span-6 cursor-pointer">
-                    <div className="text-white text-xl font-medium mb-3">
+                    <div className="dark:text-white text-xl font-medium mb-3">
                         {title}
                     </div>
 
-                    <div className="text-white ml-2">
+                    <div className="dark:text-white">
                         {description}
                     </div>
                 </div>
