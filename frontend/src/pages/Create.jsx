@@ -32,7 +32,7 @@ export const Create = ({ fetchTodos }) => {
 
     const now = new Date();
     const formattedDate = now.toString().split(' GMT')[0]; // Removes the timezone part
-    console.log(formattedDate); // e.g., "Fri Jun 07 2024 22:59:42"
+    // console.log(formattedDate); // e.g., "Fri Jun 07 2024 22:59:42"
 
 
     const addTodo = async () => {
@@ -41,9 +41,10 @@ export const Create = ({ fetchTodos }) => {
                 id: "adding"
             });
             await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/create`, {
-                title,
-                description,
-                formattedDate
+                title: title,
+                description: description,
+                marked: false,
+                Date: formattedDate
             },
                 {
                     headers: {

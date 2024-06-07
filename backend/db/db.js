@@ -67,7 +67,8 @@ const todoSchema = new mongoose.Schema({
         default: false
     },
     Date: {
-        type: String
+        type: String,
+        trim: true
     }
 
 });
