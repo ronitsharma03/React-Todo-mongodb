@@ -30,6 +30,31 @@ export const Dashboard = () => {
         }
     }, []);
 
+    const handleDeleteTodo = async (id) => {
+        console.log("Hello just entered")
+        try{
+            toast.loading("Deleting...", {
+                id: "delete"
+            });
+            
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/${id}/delete`, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            });
+
+            setTodo(prevTodo => prevTodo.filter(todo => todo._id !== id));
+            toast.success("Todo deleted", {
+                id: "delete"
+            })
+        } catch(e){
+
+            toast.error("Failed to delete Todo", {
+                id: "delete"
+            })
+        }
+    }
+
 
     return (
         <section className="min-h-screen dark:bg-slate-950 bg-gray-100">
@@ -53,7 +78,7 @@ export const Dashboard = () => {
                     ) : (
                         <div className="px-4 w-full grid gap-4 sm:grid sm:grid-cols-2 md:grid-cols-4">
                             {todo.map((item, index) => (
-                                <Todo key={index} title={item.title} description={item.description} Date={item.Date} marked={item.marked} />
+                                <Todo key={index} id={item._id} title={item.title} description={item.description} Date={item.Date} marked={item.marked} onDelete={handleDeleteTodo}/>
                             ))}
                         </div>
                     )
