@@ -84,7 +84,7 @@ export const Dashboard = () => {
                     )
                 }
             </div>
-            <Toaster position="top-center" />
+            <Toaster className="bg-slate-700" position="top-center" />
         </section>
     )
 }

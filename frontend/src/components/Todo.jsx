@@ -12,11 +12,10 @@ export const Todo = ({ id, title, description, Date, marked, onDelete }) => {
     const formattedDate = formatDate(createdAt);
 
     const [isClicked, setClicked] = useState(false);
-    const[editClick, seteditClick] = useState(false);
     
 
     const handleEditClick = () => {
-        seteditClick(!editClick);
+        
     }
     const handleDeleteClick = async () => {
         await onDelete(id);
@@ -63,7 +62,7 @@ export const Todo = ({ id, title, description, Date, marked, onDelete }) => {
                             <div className="h-full grid grid-rows-8 grid-cols-4">
 
                                 <div className="flex justify-between px-2 py-2 col-span-4 row-span-1">
-                                    <div className="text-white cursor-pointer" onClick={handleclick}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+                                    <div className="dark:text-white cursor-pointer" onClick={handleclick}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                     </svg>
                                     </div>

@@ -9,8 +9,8 @@ export const Create = ({ forTitle, forDescription, clickDone }) => {
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
-                titleRef.current && 
-                !titleRef.current.contains(event.target) && 
+                titleRef.current &&
+                !titleRef.current.contains(event.target) &&
                 !descRef.current.contains(event.target) &&
                 !divRef.current.contains(event.target)
             ) {
@@ -46,7 +46,7 @@ export const Create = ({ forTitle, forDescription, clickDone }) => {
             />
             <div className={`overflow-hidden transition-all duration-300 ${isVisible ? 'max-h-screen opacity-100 mt-4' : 'max-h-0 opacity-0 mt-0'}`}>
                 <input
-                ref={descRef}
+                    ref={descRef}
                     onChange={forDescription}
                     className="w-full bg-transparent p-5 outline-none text-white"
                     placeholder="Description"
@@ -59,7 +59,7 @@ export const Create = ({ forTitle, forDescription, clickDone }) => {
                         Close
                     </button>
                     <button onClick={clickDone} className="dark:text-white cursor-pointer px-4 py-1 text-sm">
-                        Done
+                        Add
                     </button>
                 </div>
             </div>
