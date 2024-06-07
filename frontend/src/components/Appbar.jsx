@@ -25,7 +25,7 @@ export const Appbar = (
             <div className="flex items-center gap-5">
                 <Link draggable={false} to={"/dashboard"}>
                     <div className="flex items-center gap-5">
-                        <IconListTodo className="max-sm: " />
+                        <IconListTodo className="" />
                         <div className="max-sm:hidden text-white text-[1.6em] font-semibold tracking-wide">
                             Planify
                         </div>

@@ -50,8 +50,8 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
     }
 
     return (
-        <div className={`rounded-lg relative cursor-pointer ${isClicked ? 'z-10' : ''}`}>
-            <div className={`bg-blue-100 dark:bg-transparent w-62 min-h-64 max-h-fit rounded-md border border-slate-800 overflow-hidden ${marked ? 'opacity-50' : ''} hover:cursor-pointer`}>
+        <div className={`rounded-lg relative ${isClicked ? 'z-10' : ''}`}>
+            <div className={`bg-white dark:bg-transparent w-62 min-h-64 max-h-fit rounded-md shadow-md dark:border dark:border-slate-800 overflow-hidden ${marked ? 'opacity-50' : ''}`}>
                 <div className="h-full grid grid-rows-8 grid-cols-4 tracking-wider">
 
                     <div className="flex justify-between px-2 py-2 col-span-4 row-span-1">
@@ -61,12 +61,12 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
 
                         </div>
                     </div>
-                    <div className="px-2 py-3 w-full col-span-4 row-span-6 cursor-pointer">
-                        <div className="dark:text-white text-xl font-medium mb-3" onClick={handleclick}>
+                    <div className="px-2 py-3 w-full col-span-4 row-span-6 cursor-pointer" onClick={handleclick}>
+                        <div className="dark:text-white text-xl font-medium mb-3">
                             {title}
                         </div>
 
-                        <div className="dark:text-white" onClick={handleclick}>
+                        <div className="dark:text-white">
                             {description}
                         </div>
                     </div>

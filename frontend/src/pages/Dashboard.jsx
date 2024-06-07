@@ -5,6 +5,7 @@ import axios from "axios";
 import { Create } from "./Create";
 import toast, { Toaster } from "react-hot-toast";
 import { Loader } from "../components/Loader";
+import { Footer } from "../components/Footer";
 
 export const Dashboard = () => {
     const [todo, setTodo] = useState([]);
@@ -34,11 +35,11 @@ export const Dashboard = () => {
     }, []);
 
     const handleDeleteTodo = async (id) => {
-        try{
+        try {
             toast.loading("Deleting...", {
                 id: "delete"
             });
-            
+
             await axios.delete(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/${id}/delete`, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
@@ -49,7 +50,7 @@ export const Dashboard = () => {
             toast.success("Todo deleted", {
                 id: "delete"
             })
-        } catch(e){
+        } catch (e) {
 
             toast.error("Failed to delete Todo", {
                 id: "delete"
@@ -59,34 +60,42 @@ export const Dashboard = () => {
 
 
     return (
-        <section className="min-h-screen dark:bg-slate-950 bg-gray-100">
-            <div>
-                <Appbar user={localStorage.getItem("name")} />
-            </div>
-
-            <div className="flex flex-col gap-10">
-                <div className="flex items-center justify-center p-5">
-                    <Create fetchTodos={fetchTodos} />
+        <>
+            <section className="min-h-screen dark:bg-slate-950 bg-gray-100">
+                <div>
+                    <Appbar user={localStorage.getItem("name")} />
                 </div>
 
-                {
-                    isLoading ? (
-                        <Loader />
-                    ) : todo.length === 0 ? (
-                        // Display toast when there are no todos
-                        <div className="flex items-center justify-center h-full">
-                            {toast.error("No todos to display", {id: "logout"})}
-                        </div>
-                    ) : (
-                        <div className="px-4 w-full grid gap-4 sm:grid sm:grid-cols-2 md:grid-cols-4">
-                            {todo.map((item, index) => (
-                                <Todo key={index} id={item._id} title={item.title} description={item.description} Date={item.Date} marked={item.marked} onDelete={handleDeleteTodo} fetchTodos={fetchTodos}/>
-                            ))}
-                        </div>
-                    )
-                }
-            </div>
-            <Toaster className="bg-slate-700" position="top-center" />
-        </section>
+                <div className="flex flex-col gap-10">
+                    <div className="flex items-center justify-center p-5">
+                        <Create fetchTodos={fetchTodos} />
+                    </div>
+
+                    {
+                        isLoading ? (
+                            <Loader />
+                        ) : todo.length === 0 ? (
+                            // Display toast when there are no todos
+                            <div className="flex items-center justify-center h-full">
+                                {toast.error("No todos to display", { id: "logout" })}
+                            </div>
+                        ) : (
+                            <div className="px-4 w-full grid gap-4 sm:grid sm:grid-cols-2 md:grid-cols-4">
+                                {todo.map((item, index) => (
+                                    <Todo key={index} id={item._id} title={item.title} description={item.description} Date={item.Date} marked={item.marked} onDelete={handleDeleteTodo} fetchTodos={fetchTodos} />
+                                ))}
+                            </div>
+                        )
+                    }
+                </div>
+                {/* <div className="">
+                <Footer />
+            </div> */}
+                <Toaster className="bg-slate-700" position="top-center" />
+            </section>
+            <section className="pt-40 dark:bg-slate-950 bg-gray-100">
+                <Footer />
+            </section>
+        </>
     )
 }
