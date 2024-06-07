@@ -27,7 +27,7 @@ export const Todo = ({ id, title, description, Date, marked, onDelete }) => {
 
     return (
         <div className={`rounded-lg relative cursor-pointer ${isClicked ? 'z-10' : ''}`}>
-            <div className={`bg-blue-100 dark:bg-transparent w-62 h-60 rounded-md border border-slate-800 overflow-hidden ${marked ? 'opacity-50' : ''} hover:cursor-pointer`} onClick={handleclick}>
+            <div className={`bg-blue-100 dark:bg-transparent w-62 h-60 rounded-md border border-slate-800 overflow-hidden ${marked ? 'opacity-50' : ''} hover:cursor-pointer`}>
                 <div className="h-full grid grid-rows-8 grid-cols-4 tracking-wider">
 
                     <div className="flex justify-between px-2 py-2 col-span-4 row-span-1">
@@ -38,11 +38,11 @@ export const Todo = ({ id, title, description, Date, marked, onDelete }) => {
                         </div>
                     </div>
                     <div className="px-2 py-3 w-full col-span-4 row-span-6 cursor-pointer">
-                        <div className="dark:text-white text-xl font-medium mb-3">
+                        <div className="dark:text-white text-xl font-medium mb-3" onClick={handleclick}>
                             {title}
                         </div>
 
-                        <div className="dark:text-white">
+                        <div className="dark:text-white" onClick={handleclick}>
                             {description}
                         </div>
                     </div>

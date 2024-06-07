@@ -1,7 +1,11 @@
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
-export const Create = ({ forTitle, forDescription, clickDone }) => {
+export const Create = ({fetchTodos}) => {
     const [isVisible, setIsVisible] = useState(false);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const titleRef = useRef(null);
     const descRef = useRef(null);
     const divRef = useRef(null);
@@ -26,6 +30,34 @@ export const Create = ({ forTitle, forDescription, clickDone }) => {
         };
     }, [isVisible]);
 
+    const addTodo = async () => {
+        try {
+            toast.loading("Adding Task...", {
+                id: "adding"
+            });
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/create`, {
+                title,
+                description
+            },
+                {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("token")
+                    }
+                }
+            );
+            toast.success("Added Task", {
+                id: "adding"
+            });
+            fetchTodos();
+            handleCloseClick();
+
+        } catch (error) {
+            toast.error("Error adding Task!", {
+                id: "adding"
+            });
+        }
+    }
+
     const handleInputClick = () => {
         setIsVisible(true);
     };
@@ -40,14 +72,18 @@ export const Create = ({ forTitle, forDescription, clickDone }) => {
             <input
                 ref={titleRef}
                 onClick={handleInputClick}
-                onChange={forTitle}
+                onChange={e => {
+                    setTitle(e.target.value)
+                }}
                 className="bg-transparent p-3 outline-none text-white w-full"
                 placeholder="Write something"
             />
             <div className={`overflow-hidden transition-all duration-300 ${isVisible ? 'max-h-screen opacity-100 mt-4' : 'max-h-0 opacity-0 mt-0'}`}>
                 <input
                     ref={descRef}
-                    onChange={forDescription}
+                    onChange={e => {
+                        setDescription(e.target.value)
+                    }}
                     className="w-full bg-transparent p-5 outline-none text-white"
                     placeholder="Description"
                 />
@@ -58,11 +94,12 @@ export const Create = ({ forTitle, forDescription, clickDone }) => {
                     >
                         Close
                     </button>
-                    <button onClick={clickDone} className="dark:text-white cursor-pointer px-4 py-1 text-sm">
+                    <button onClick={addTodo} className="dark:text-white cursor-pointer px-4 py-1 text-sm">
                         Add
                     </button>
                 </div>
             </div>
+            <Toaster position="top-center" />
         </div>
     );
 };

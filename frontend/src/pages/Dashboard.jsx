@@ -10,9 +10,9 @@ export const Dashboard = () => {
     const [todo, setTodo] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
-    useEffect(() => {
+    const fetchTodos = async () => {
         try {
-            axios.get(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/mytodos`, {
+            await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/mytodos`, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }
@@ -28,10 +28,12 @@ export const Dashboard = () => {
                 id: "signin"
             });
         }
+    }
+    useEffect(() => {
+        fetchTodos();
     }, []);
 
     const handleDeleteTodo = async (id) => {
-        console.log("Hello just entered")
         try{
             toast.loading("Deleting...", {
                 id: "delete"
@@ -64,7 +66,7 @@ export const Dashboard = () => {
 
             <div className="flex flex-col gap-10">
                 <div className="flex items-center justify-center p-5">
-                    <Create />
+                    <Create fetchTodos={fetchTodos} />
                 </div>
 
                 {
