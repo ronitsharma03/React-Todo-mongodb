@@ -29,6 +29,7 @@ export const Create = ({fetchTodos}) => {
             document.body.removeEventListener("click", handleClickOutside);
         };
     }, [isVisible]);
+    const createdAt = Date.now();
 
     const addTodo = async () => {
         try {
@@ -37,7 +38,8 @@ export const Create = ({fetchTodos}) => {
             });
             await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/create`, {
                 title,
-                description
+                description,
+                Date: createdAt.toISOString()
             },
                 {
                     headers: {

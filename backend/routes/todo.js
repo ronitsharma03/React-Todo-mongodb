@@ -10,10 +10,11 @@ const todoBody = zod.object({
     title: zod.string(),
     description: zod.string(),
     marked: zod.boolean().optional(),
+    Date: zod.date().optional()
 });
 router.post("/create", authMiddleware, async (req, res) => {
     const { success } = todoBody.safeParse(req.body);
-    const { title, description } = req.body;
+    const { title, description, date } = req.body;
     if (!success) {
         return res.status(411).json({
             message: "Check Inputs Please"
@@ -25,6 +26,7 @@ router.post("/create", authMiddleware, async (req, res) => {
             title: title,
             description: description,
             marked: false,
+            Date: date
         });
 
         return res.json({
