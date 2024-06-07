@@ -5,7 +5,11 @@ const dotenv = require("dotenv");
 dotenv.config();
 const port = process.env.PORT || 8080;
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 const mainRouter = require("./routes/index");
