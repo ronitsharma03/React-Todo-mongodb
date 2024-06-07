@@ -39,7 +39,7 @@ export const Create = ({fetchTodos}) => {
             await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/create`, {
                 title,
                 description,
-                Date: createdAt.toISOString()
+                Date: createdAt
             },
                 {
                     headers: {
