@@ -10,7 +10,7 @@ const todoBody = zod.object({
     title: zod.string(),
     description: zod.string(),
     marked: zod.boolean().optional(),
-    Date: zod.string().datetime().optional()
+    Date: zod.string().optional()
 });
 router.post("/create", authMiddleware, async (req, res) => {
     const { success } = todoBody.safeParse(req.body);

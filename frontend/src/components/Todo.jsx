@@ -3,15 +3,15 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodos }) => {
-    const createdAt = Date.slice(0, 10);
-    const time = Date.slice(11, 16);
+    // const createdAt = Date.slice(0, 10);
+    // const time = Date.slice(11, 16);
 
-    function formatDate(inputDate) {
-        const parts = inputDate.split("-");
-        return `${parts[2]}-${parts[1]}-${parts[0]}`;
-    }
+    // function formatDate(inputDate) {
+    //     const parts = inputDate.split("-");
+    //     return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    // }
 
-    const formattedDate = formatDate(createdAt);
+    // const formattedDate = formatDate(createdAt);
 
     const [isClicked, setClicked] = useState(false);
     const [ismarked, setmarked] = useState(marked);
@@ -57,7 +57,8 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
                     <div className="flex justify-between px-2 py-2 col-span-4 row-span-1">
                         <input className="bg-transparent rounded-full" type="checkbox" onChange={handleMarkTodo} checked={ismarked}/>
                         <div className="text-slate-600 mr-2 flex gap-5">
-                            {time} - {formattedDate}
+                            {/* {time} - {formattedDate} */}
+                            {Date}
 
                         </div>
                     </div>

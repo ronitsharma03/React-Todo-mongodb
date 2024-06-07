@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-export const Create = ({fetchTodos}) => {
+export const Create = ({ fetchTodos }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -29,7 +29,16 @@ export const Create = ({fetchTodos}) => {
             document.body.removeEventListener("click", handleClickOutside);
         };
     }, [isVisible]);
-    const createdAt = Date.now();
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const day = now.getDate().toString().padStart(2, '0');
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+
+    const createdAt = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
     const addTodo = async () => {
         try {
