@@ -40,8 +40,8 @@ export const Signin = () => {
 
     return (
         <section className="bg-gray-50 dark:bg-slate-800">
-            <div className="w-full h-screen flex flex-col items-center justify-center bg-white rounded-lg shadow dark:bg-slate-950">
-                <div className="dark:bg-slate-950 bg-blue-100 px-28 pt-20 pb-20 rounded-xl flex flex-col items-center w-[35%] dark:border dark:border-slate-700">
+            <div className="w-full h-screen flex flex-col items-center justify-center bg-white rounded-lg shadow dark:bg-slate-950 max-sm:px-5">
+                <div className="dark:bg-slate-950 bg-blue-100 pt-20 max-md:pt-10 max-md:pb-10 pb-20 rounded-xl flex flex-col items-center max-sm:px-5 max-sm:min-w-[90%] sm:min-w-96 sm:px-5 lg:w-[30%] dark:border dark:border-slate-700">
                     <Heading headingText={"Sign in"} />
                     <Input type={"email"} placeText={"yours@example.com"} labelText={"Email"} onchange={e => {
                         setusername(e.target.value)
