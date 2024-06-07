@@ -24,8 +24,8 @@ router.post("/create", authMiddleware, async (req, res) => {
             userId: req.userId,
             title: title,
             description: description,
-            marked: marked,
-            Date: Date
+            marked: false,
+            Date: new Date()
         });
 
         return res.json({
