@@ -13,7 +13,7 @@ export const Home = () => {
                 navigate("/signin");
             }
             else {
-                axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/me`, {
+                axios.get(`${import.meta.env.VITE_BACKEND_URL}user/me`, {
                     headers: {
                         Authorization: localStorage.getItem("token")
                     }

@@ -29,16 +29,11 @@ export const Create = ({ fetchTodos }) => {
             document.body.removeEventListener("click", handleClickOutside);
         };
     }, [isVisible]);
+
     const now = new Date();
+    const formattedDate = now.toString().split(' GMT')[0]; // Removes the timezone part
+    console.log(formattedDate); // e.g., "Fri Jun 07 2024 22:59:42"
 
-    const year = now.getFullYear();
-    const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
-    const day = now.getDate().toString().padStart(2, '0');
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-
-    const createdAt = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
     const addTodo = async () => {
         try {
@@ -48,7 +43,7 @@ export const Create = ({ fetchTodos }) => {
             await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/create`, {
                 title,
                 description,
-                createdAt
+                formattedDate
             },
                 {
                     headers: {

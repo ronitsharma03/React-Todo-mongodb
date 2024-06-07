@@ -92,7 +92,8 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
                                     </svg>
                                     </div>
                                     <div className="text-slate-600 mr-2 flex gap-5 dark:text-white">
-                                        {time} - {formattedDate}
+                                        {/* {time} - {formattedDate} */}
+                                        {Date}
 
                                     </div>
                                 </div>
