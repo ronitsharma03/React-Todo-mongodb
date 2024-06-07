@@ -31,7 +31,7 @@ export const ThemeBtn = () => {
         if(theme === "dark") {
             toast('Hello Light!',
                 {
-                    duration: 700,
+                    duration: 1200,
                     icon: '👏',
                     style: {
                         borderRadius: '10px',
@@ -45,7 +45,7 @@ export const ThemeBtn = () => {
         else{
             toast('Hello Darkness!',
                 {
-                    duration: 700,
+                    duration: 1200,
                     icon: '👏',
                     style: {
                         borderRadius: '10px',

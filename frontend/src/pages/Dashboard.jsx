@@ -80,7 +80,7 @@ export const Dashboard = () => {
                     ) : (
                         <div className="px-4 w-full grid gap-4 sm:grid sm:grid-cols-2 md:grid-cols-4">
                             {todo.map((item, index) => (
-                                <Todo key={index} id={item._id} title={item.title} description={item.description} Date={item.Date} marked={item.marked} onDelete={handleDeleteTodo}/>
+                                <Todo key={index} id={item._id} title={item.title} description={item.description} Date={item.Date} marked={item.marked} onDelete={handleDeleteTodo} fetchTodos={fetchTodos}/>
                             ))}
                         </div>
                     )

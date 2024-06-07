@@ -1,6 +1,8 @@
 import { useState } from "react";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
-export const Todo = ({ id, title, description, Date, marked, onDelete }) => {
+export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodos }) => {
     const createdAt = Date.slice(0, 10);
     const time = Date.slice(11, 16);
 
@@ -12,7 +14,7 @@ export const Todo = ({ id, title, description, Date, marked, onDelete }) => {
     const formattedDate = formatDate(createdAt);
 
     const [isClicked, setClicked] = useState(false);
-    
+    const [ismarked, setmarked] = useState(marked);
 
     const handleEditClick = () => {
         
@@ -25,13 +27,35 @@ export const Todo = ({ id, title, description, Date, marked, onDelete }) => {
         setClicked(!isClicked);
     }
 
+    const handleMarkTodo = async () => {
+        try{
+            toast.loading("Marking...", {
+                id: "marked"
+            })
+            await axios.patch(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/${id}/toggle`, {}, 
+            {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            })
+            
+                setmarked(!ismarked);
+                fetchTodos();
+            toast.success(`Marked as ${!ismarked ? 'Completed' : 'Pending'}!`, {
+                id: "marked"
+            });
+        }catch(e){
+
+        }
+    }
+
     return (
         <div className={`rounded-lg relative cursor-pointer ${isClicked ? 'z-10' : ''}`}>
-            <div className={`bg-blue-100 dark:bg-transparent w-62 h-60 rounded-md border border-slate-800 overflow-hidden ${marked ? 'opacity-50' : ''} hover:cursor-pointer`}>
+            <div className={`bg-blue-100 dark:bg-transparent w-62 min-h-64 max-h-fit rounded-md border border-slate-800 overflow-hidden ${marked ? 'opacity-50' : ''} hover:cursor-pointer`}>
                 <div className="h-full grid grid-rows-8 grid-cols-4 tracking-wider">
 
                     <div className="flex justify-between px-2 py-2 col-span-4 row-span-1">
-                        <input className="bg-transparent rounded-full" type="checkbox" />
+                        <input className="bg-transparent rounded-full" type="checkbox" onChange={handleMarkTodo} checked={ismarked}/>
                         <div className="text-slate-600 mr-2 flex gap-5">
                             {time} - {formattedDate}
 
@@ -47,7 +71,7 @@ export const Todo = ({ id, title, description, Date, marked, onDelete }) => {
                         </div>
                     </div>
                     <div className="text-slate-600 place-self-end col-span-4 px-3 row-span-1">
-                        <div className="opacity-50 mb-1">
+                        <div className="mb-1">
                             {marked ? "Completed" : "Pending"}
                         </div>
                     </div>
