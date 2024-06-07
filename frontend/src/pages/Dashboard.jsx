@@ -88,9 +88,6 @@ export const Dashboard = () => {
                         )
                     }
                 </div>
-                {/* <div className="">
-                <Footer />
-            </div> */}
                 <Toaster className="bg-slate-700" position="top-center" />
             </section>
             <section className="pt-40 dark:bg-slate-950 bg-gray-100">
