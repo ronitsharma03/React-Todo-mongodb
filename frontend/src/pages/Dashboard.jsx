@@ -77,7 +77,7 @@ export const Dashboard = () => {
                         ) : todo.length === 0 ? (
                             // Display toast when there are no todos
                             <div className="flex items-center justify-center h-full">
-                                {toast.error("No todos to display", { id: "logout" })}
+                                {toast.error("No todos to display")}
                             </div>
                         ) : (
                             <div className="px-4 w-full grid gap-4 sm:grid sm:grid-cols-2 md:grid-cols-4">
