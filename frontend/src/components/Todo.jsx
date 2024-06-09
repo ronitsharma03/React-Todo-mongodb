@@ -48,7 +48,7 @@ export const Todo = ({ id, title, description, date, marked, onDelete, fetchTodo
 
     return (
         <div className={`rounded-lg relative ${isClicked ? 'z-10' : ''}`}>
-            <div className={`bg-white dark:bg-transparent w-62 min-h-64 max-h-fit rounded-md shadow-md dark:border dark:border-slate-800 overflow-hidden ${ismarked ? 'opacity-50' : ''}`}>
+            <div className={`bg-white dark:bg-transparent w-62 min-h-64 max-h-fit rounded-md shadow-md dark:shadow-slate-700 dark:border dark:border-slate-800 overflow-hidden ${ismarked ? 'opacity-50' : ''}`}>
                 <div className="h-full grid grid-rows-8 grid-cols-4 tracking-wider">
                     <div className="flex justify-between px-2 py-2 col-span-4 row-span-1">
                         <input className="bg-transparent rounded-full" type="checkbox" onChange={handleMarkTodo} checked={ismarked} />

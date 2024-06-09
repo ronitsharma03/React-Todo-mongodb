@@ -76,25 +76,30 @@ export const Create = ({ fetchTodos }) => {
     };
 
     return (
-        <div ref={divRef} className="mt-20 max-sm:w-full max-md:w-[70%] flex flex-col w-[50%] bg-transparent border border-slate-600 rounded-xl transition-all duration-300">
-            <input
-                ref={titleRef}
-                onClick={handleInputClick}
-                onChange={e => {
-                    setTitle(e.target.value)
-                }}
-                className="bg-transparent p-3 outline-none dark:text-white w-full"
-                placeholder="Write something"
-            />
-            <div className={`overflow-hidden transition-all duration-300 ${isVisible ? 'max-h-screen opacity-100 mt-4' : 'max-h-0 opacity-0 mt-0'}`}>
+        <div ref={divRef} className="mt-20 max-sm:w-full max-md:w-[70%] flex flex-col w-[50%] bg-white dark:bg-transparent dark:border-blue-500 rounded-xl transition-all duration-300 p-4 shadow-md dark:shadow-slate-800">
+            <div className="">
                 <input
-                    ref={descRef}
+                    ref={titleRef}
+                    onClick={handleInputClick}
+                    onChange={e => {
+                        setTitle(e.target.value)
+                    }}
+                    className="bg-transparent pb-2 px-2 outline-none dark:text-white w-full focus:border-b focus:border-blue-500 transition-colors duration-0"
+                    placeholder="Write something"
+                    spellCheck="false"
+                />
+            </div>
+            <div className={`overflow-hidden transition-all duration-300 ${isVisible ? 'max-h-screen opacity-100 mt-4' : 'max-h-0 opacity-0 mt-0'}`}>
+                <textarea ref={descRef}
                     onChange={e => {
                         setDescription(e.target.value)
                     }}
-                    className="w-full bg-transparent p-5 outline-none dark:text-white"
+                    className="w-full h-full bg-transparent outline-none dark:text-white resize-y rounded-lg border-blue-800"
                     placeholder="Description"
-                />
+                    spellCheck="false"
+                >
+
+                </textarea>
                 <div className="flex items-center justify-end gap-2 pb-2 mr-5">
                     <button
                         onClick={handleCloseClick}
