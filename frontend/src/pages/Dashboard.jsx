@@ -47,6 +47,7 @@ export const Dashboard = () => {
             });
 
             setTodo(prevTodo => prevTodo.filter(todo => todo._id !== id));
+            fetchTodos();
             toast.success("Todo deleted", {
                 id: "delete"
             })
