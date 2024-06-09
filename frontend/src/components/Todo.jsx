@@ -3,15 +3,6 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodos }) => {
-    // const createdAt = Date.slice(0, 10);
-    // const time = Date.slice(11, 16);
-
-    // function formatDate(inputDate) {
-    //     const parts = inputDate.split("-");
-    //     return `${parts[2]}-${parts[1]}-${parts[0]}`;
-    // }
-
-    // const formattedDate = formatDate(createdAt);
 
     const [isClicked, setClicked] = useState(false);
     const [ismarked, setmarked] = useState(marked);
@@ -22,6 +13,10 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
     const handleDeleteClick = async () => {
         await onDelete(id);
         setClicked(false);
+        if(ismarked){
+            ismarked = !ismarked;
+        }
+        fetchTodos();
     }
     const handleclick = () => {
         setClicked(!isClicked);
