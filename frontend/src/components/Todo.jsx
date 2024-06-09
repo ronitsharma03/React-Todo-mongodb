@@ -13,9 +13,6 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
     const handleDeleteClick = async () => {
         await onDelete(id);
         setClicked(false);
-        if(ismarked){
-            ismarked = !ismarked;
-        }
         fetchTodos();
     }
     const handleclick = () => {
