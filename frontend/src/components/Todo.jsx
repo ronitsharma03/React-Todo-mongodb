@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export const Todo = ({ id, title, description, date, marked, onDelete, fetchTodos }) => {
+export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodos }) => {
     const [isClicked, setClicked] = useState(false);
     const [ismarked, setmarked] = useState(marked);
 
@@ -53,7 +53,7 @@ export const Todo = ({ id, title, description, date, marked, onDelete, fetchTodo
                     <div className="flex justify-between px-2 py-2 col-span-4 row-span-1">
                         <input className="bg-transparent rounded-full" type="checkbox" onChange={handleMarkTodo} checked={ismarked} />
                         <div className="text-slate-600 mr-2 flex gap-5">
-                            {date}
+                            {Date}
                         </div>
                     </div>
                     <div className="px-2 py-3 w-full col-span-4 row-span-6 cursor-pointer" onClick={handleclick}>
@@ -83,7 +83,7 @@ export const Todo = ({ id, title, description, date, marked, onDelete, fetchTodo
                                     </svg>
                                 </div>
                                 <div className="text-slate-600 mr-2 flex gap-5 dark:text-white">
-                                    {date}
+                                    {Date}
                                 </div>
                             </div>
                             <div className="px-2 py-6 w-full col-span-4 row-span-6">

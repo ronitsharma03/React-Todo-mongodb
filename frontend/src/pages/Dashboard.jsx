@@ -13,17 +13,21 @@ export const Dashboard = () => {
 
     const fetchTodos = async () => {
         try {
-            await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/mytodos`, {
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}api/v1/user/todos/mytodos`, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }
-            })
-                .then(response => {
-                    setTodo(response.data.todos);
-                    if (todo) {
-                        setLoading(false);
-                    }
-                });
+            });
+            setTodo(response.data.todos);
+            setLoading(false)
+            // console.log(response.data.todos[0].Date)
+
+                // .then(response => {
+                //     setTodo(response.data.todos);
+                //     if (todo) {
+                //         setLoading(false);
+                //     }
+                // });
         } catch (e) {
             toast.error("Something went wrong", {
                 id: "signin"
@@ -66,7 +70,6 @@ export const Dashboard = () => {
                 <div>
                     <Appbar user={localStorage.getItem("name")} />
                 </div>
-
                 <div className="flex flex-col gap-10">
                     <div className="flex items-center justify-center p-5">
                         <Create fetchTodos={fetchTodos} />
@@ -84,9 +87,10 @@ export const Dashboard = () => {
                             </div>
                         ) : (
                             <div className="px-4 w-full grid gap-4 sm:grid sm:grid-cols-2 md:grid-cols-4">
-                                {todo.map((item, index) => (
-                                    <Todo key={index} id={item._id} title={item.title} description={item.description} Date={item.Date} marked={item.marked} onDelete={handleDeleteTodo} fetchTodos={fetchTodos} />
-                                ))}
+                                {todo.map((item, index) => {
+                                    return <Todo key={index} id={item._id} title={item.title} description={item.description} Date={item.Date} marked={item.marked} onDelete={handleDeleteTodo} fetchTodos={fetchTodos} />
+
+                                })}
                             </div>
                         )
                     }
