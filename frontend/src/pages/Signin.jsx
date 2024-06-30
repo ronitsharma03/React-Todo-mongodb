@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom"
 export const Signin = () => {
     const [username, setusername] = useState("");
     const [password, setPassword] = useState("");
+    const [user, setUser] = useState("");
     const navigate = useNavigate();
 
     const signinData = async () => {
@@ -25,7 +26,8 @@ export const Signin = () => {
             )
             localStorage.setItem("token", response.data.token);
             const loggedUserName = response.data.firstname;
-            localStorage.setItem("name", ((loggedUserName).charAt(0).toUpperCase() + (loggedUserName).slice(1)));
+            setUser((loggedUserName).charAt(0).toUpperCase() + (loggedUserName).slice(1));
+            // localStorage.setItem("name", ((loggedUserName).charAt(0).toUpperCase() + (loggedUserName).slice(1)));
             toast.success("Logged in..", {
                 id: "signin"
             });

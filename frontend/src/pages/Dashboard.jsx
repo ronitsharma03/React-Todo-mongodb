@@ -10,6 +10,7 @@ import { Footer } from "../components/Footer";
 export const Dashboard = () => {
     const [todo, setTodo] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const [user, setuser] = useState("");
 
     const fetchTodos = async () => {
         try {
@@ -20,6 +21,8 @@ export const Dashboard = () => {
             });
             setTodo(response.data.todos);
             setLoading(false)
+            
+            setuser(response.data.firstName);
             // console.log(response.data.todos[0].Date)
 
                 // .then(response => {
@@ -68,7 +71,7 @@ export const Dashboard = () => {
         <>
             <section className="min-h-screen dark:bg-slate-950 bg-gray-100">
                 <div>
-                    <Appbar user={localStorage.getItem("name")} />
+                    <Appbar user={user} />
                 </div>
                 <div className="flex flex-col gap-10">
                     <div className="flex items-center justify-center p-5">
