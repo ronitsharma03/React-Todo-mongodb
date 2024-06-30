@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Todo } = require("../db/db");
+const { Todo, User } = require("../db/db");
 
 const { authMiddleware } = require("../middleware/middleware");
 const zod = require("zod");
@@ -151,6 +151,16 @@ router.get("/mytodos", authMiddleware, async (req, res) => {
             userId: req.userId
         });
 
+        const name = await User.find({
+            _id: req.userId
+        });
+        
+        const firstname = name.map(item => {
+            return item.firstname
+        });
+        console.log(firstname);
+        
+
         if(!userTodos){
             return res.json({
                 message: "Todo list is empty"
@@ -160,7 +170,8 @@ router.get("/mytodos", authMiddleware, async (req, res) => {
         console.log(userTodos);
         return res.json({
             todos: userTodos,
-            message: "Todo found!"
+            message: "Todo found!",
+            firstName: firstname,
         });
     }catch(e){
         console.log("Unexpected Error occurred");
