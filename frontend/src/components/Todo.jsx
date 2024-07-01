@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodos }) => {
     const [isClicked, setClicked] = useState(false);
     const [ismarked, setmarked] = useState(marked);
+    const [edit, setedit] = useState(false);
+
 
     useEffect(() => {
         setmarked(marked);
@@ -12,6 +14,8 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
 
     const handleEditClick = () => {
         // Edit functionality can be implemented here
+        setedit(!edit);
+        
     };
 
     const handleDeleteClick = async () => {
@@ -48,7 +52,7 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
 
     return (
         <div className={`rounded-lg relative ${isClicked ? 'z-10' : ''}`}>
-            <div className={`bg-white dark:bg-transparent w-62 min-h-64 max-h-fit rounded-md shadow-md dark:shadow-slate-700 dark:border dark:border-slate-800 overflow-hidden ${ismarked ? 'opacity-50' : ''}`}>
+            <div className={`bg-white dark:bg-transparent w-62 h-56 min-h-20 max-h-32 rounded-md shadow-md dark:shadow-slate-700 dark:border dark:border-slate-800 overflow-hidden ${ismarked ? 'opacity-50' : ''}`}>
                 <div className="h-full grid grid-rows-8 grid-cols-4 tracking-wider">
                     <div className="flex justify-between px-2 py-2 col-span-4 row-span-1">
                         <input className="bg-transparent rounded-full" type="checkbox" onChange={handleMarkTodo} checked={ismarked} />
@@ -56,12 +60,9 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
                             {Date}
                         </div>
                     </div>
-                    <div className="px-2 py-3 w-full col-span-4 row-span-6 cursor-pointer" onClick={handleclick}>
+                    <div className="px-10 py-6 w-full col-span-4 row-span-6 cursor-pointer" onClick={handleclick}>
                         <div className="dark:text-white text-xl font-medium mb-3">
                             {title}
-                        </div>
-                        <div className="dark:text-white">
-                            {description}
                         </div>
                     </div>
                     <div className="text-slate-600 place-self-end col-span-4 px-3 row-span-1">
@@ -74,9 +75,9 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
 
             {isClicked && (
                 <div className={`fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-70 cursor-default`}>
-                    <div className={`bg-blue-100 dark:bg-slate-800 min-w-96 max-w-[35%] h-64 max-h-[40%] rounded-md border border-slate-800 overflow-hidden`}>
-                        <div className="h-full grid grid-rows-8 grid-cols-4">
-                            <div className="flex justify-between px-2 py-2 col-span-4 row-span-1">
+                    <div className={`bg-blue-100 dark:bg-slate-800 w-full max-w-xl lg:max-w-3xl md:p-2 rounded-md border border-slate-800 overflow-hidden`}>
+                        <div className="grid grid-rows-8 grid-cols-4 h-full">
+                            <div className="flex justify-between px-2 col-span-4 row-span-1">
                                 <div className="dark:text-white cursor-pointer" onClick={handleclick}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -86,7 +87,7 @@ export const Todo = ({ id, title, description, Date, marked, onDelete, fetchTodo
                                     {Date}
                                 </div>
                             </div>
-                            <div className="px-2 py-6 w-full col-span-4 row-span-6">
+                            <div className="px-2 w-full col-span-4 row-span-6">
                                 <div className="text-xl font-medium mb-3 dark:text-white">
                                     {title}
                                 </div>

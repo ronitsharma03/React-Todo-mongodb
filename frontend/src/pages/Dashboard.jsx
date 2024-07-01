@@ -84,8 +84,10 @@ export const Dashboard = () => {
                         ) : (todo.length === 0) ? (
                             // Display toast when there are no todos
                             <div className="flex items-center justify-center h-full">
-                                {toast.error("No todos to display", {
-                                    id: " "
+                                {toast("Hurray! No pending task", {
+                                    id: " ",
+                                    duration: 1000,
+                                    icon: "😎"
                                 })}
                             </div>
                         ) : (
