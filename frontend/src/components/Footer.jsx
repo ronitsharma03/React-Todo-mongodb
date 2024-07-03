@@ -10,7 +10,7 @@ export const Footer = () => {
                             <IconListTodo />
                         </a>
                         <div className="text-white text-[1.6em] font-semibold tracking-wide">
-                            Planify
+                            TaskWhiz
                         </div>
                     </div>
                     <div className="text-2xl text-center sm:flex items-center text-white font-bold justify-center gap-14 lg:gap-10 xl:gap-14 transition-all duration-500 leading-loose">
@@ -39,7 +39,7 @@ export const Footer = () => {
 
                 <div className="py-7 border-t border-gray-300">
                     <div className="flex items-center justify-center">
-                        <span className="dark:text-gray-400 text-gray-200">©<a href="/">Planify</a> {new Date().getFullYear()}, All rights reserved.</span>
+                        <span className="dark:text-gray-400 text-gray-200">©<a href="/">TaskWhiz</a> {new Date().getFullYear()}, All rights reserved.</span>
                     </div>
                 </div>
             </div>

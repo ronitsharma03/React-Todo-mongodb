@@ -20,18 +20,9 @@ export const Dashboard = () => {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }
             });
+            setuser(response.data.firstName);
             setTodo(response.data.todos);
             setLoading(false)
-            
-            setuser(response.data.firstName);
-            // console.log(response.data.todos[0].Date)
-
-                // .then(response => {
-                //     setTodo(response.data.todos);
-                //     if (todo) {
-                //         setLoading(false);
-                //     }
-                // });
         } catch (e) {
             toast.error("Something went wrong", {
                 id: "signin"

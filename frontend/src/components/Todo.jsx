@@ -92,20 +92,20 @@ export const Todo = ({
     <div className="relative p-1">
       <div className={`rounded-lg ${isClicked ? "z-10" : ""}`}>
         <div
-          className={`bg-white dark:bg-transparent w-62 h-56 min-h-20 max-h-32 rounded-md shadow-md dark:shadow-slate-700 dark:border dark:border-slate-800 overflow-hidden ${
+          className={`bg-white border border-zinc-200 dark:bg-transparent w-62 h-56 min-h-20 max-h-32 rounded-md shadow-sm dark:shadow-sm dark:shadow-slate-700 dark:border dark:border-blue-800 overflow-hidden ${
             ismarked ? "opacity-50" : ""
           }`}
         >
           <div className="h-full grid grid-rows-8 grid-cols-4 tracking-wider">
-            <div className="absolute left-0 top-0 z-10 flex justify-between col-span-4 row-span-1">
+            <div className="flex justify-between col-span-4 row-span-1">
               <input
-                className="bg-slate-900 rounded-full"
+                className="absolute left-0 top-0 z-10 bg-white dark:bg-slate-800 rounded-full border border-slate-400 p-2"
                 type="checkbox"
                 onChange={handleMarkTodo}
                 checked={ismarked}
               />
-              <div className="w-full mt-2 ml-2">
-                <div className="text-slate-600 mr-2 gap-5 ">
+              <div className="relative w-full">
+                <div className="absolute right-0 mr-3 mt-1 text-slate-600 text-sm gap-5">
                   {Date}
                 </div>
               </div>
@@ -119,7 +119,9 @@ export const Todo = ({
               </div>
             </div>
             <div className="text-slate-600 place-self-end col-span-4 px-3 row-span-1">
-              <div className="mb-1">{ismarked ? "Completed" : "Pending"}</div>
+              <div className="text-sm">
+                {ismarked ? "Completed" : "Pending"}
+              </div>
             </div>
           </div>
         </div>

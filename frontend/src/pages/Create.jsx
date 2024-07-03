@@ -31,6 +31,7 @@ export const Create = ({ fetchTodos }) => {
     }, [isVisible]);
 
     const now = new Date();
+    console.log(now)
     const formattedDate = now.toString().split(' GMT')[0]; // Removes the timezone part
     // console.log(formattedDate); // e.g., "Fri Jun 07 2024 22:59:42"
 
